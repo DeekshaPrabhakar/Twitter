@@ -51,10 +51,16 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app.
 - textview for rendering rich content
+- table cell select on textview doesn't respect table cell selection
+
+##Acknowledgements
+- AFNetworking
+- BDBOAuth1Manager
+- Icons (updated later)
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2016] [Deeksha Prabhakar]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
