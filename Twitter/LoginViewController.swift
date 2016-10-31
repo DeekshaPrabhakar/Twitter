@@ -19,11 +19,11 @@ class LoginViewController: UIViewController {
     
     @IBAction func onLoginButton(_ sender: AnyObject) {
         let client = TwitterClient.sharedInstance
-        client.login(success: { 
+        client.login(success: {
             print("loggedin")
             self.performSegue(withIdentifier: "loginSegue", sender: nil)
         }) { (error: Error) in
-             print(error.localizedDescription)
+            print(error.localizedDescription)
         }
     }
     

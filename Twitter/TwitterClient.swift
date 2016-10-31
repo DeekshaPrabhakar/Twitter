@@ -21,6 +21,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         loginFailure = failure
         
         TwitterClient.sharedInstance.deauthorize() //clears keychain of previous sessions
+        self.requestSerializer.removeAccessToken()
         
         TwitterClient.sharedInstance.fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: NSURL(string: "deekshaTwitter://oauth") as URL!, scope: nil, success: { (requestToken: BDBOAuth1Credential?) in
             print("got token")
@@ -44,7 +45,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         let requestToken = BDBOAuth1Credential(queryString: url.query)
         
         fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken:BDBOAuth1Credential?) -> Void in
-            
+            self.requestSerializer.saveAccessToken(accessToken)
             self.currentAccount(success: { (user:User) in
                 User.currentUser = user
                 self.loginSuccess?()
@@ -53,24 +54,85 @@ class TwitterClient: BDBOAuth1SessionManager {
                     self.loginFailure?(error)
             })
             
-            
             },failure: { (error: Error?) in
                 self.loginFailure?(error!)
         })
     }
     
-    func homeTimeline(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()){
-        get("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task:URLSessionDataTask, response:Any?) -> Void in
+    func homeTimeline(lowestTweetId: Int64, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()){
+        
+        var qParams = ["count": 20] as [String: Any]
+        
+        if(lowestTweetId != 0){
+            qParams = ["count": 20, "max_id" : String(lowestTweetId)] as [String: Any]
+        }
+        
+        get("1.1/statuses/home_timeline.json", parameters: qParams, progress: nil, success: { (task:URLSessionDataTask, response:Any?) -> Void in
             
             let dictionaries = response as! [NSDictionary]
             let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
             success(tweets)
             
             }, failure: { (tsk:URLSessionDataTask?, err:Error) -> Void in
-                
                 failure(err)
         })
-        
+    }
+    
+    func favoriteATweet(tweetId: Int64, completion:@escaping (_ resp:AnyObject?, _ error:Error?) ->())
+    {
+        post("1.1/favorites/create.json?id=\(tweetId)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
+            
+            completion(response as AnyObject? , nil)
+            
+            }, failure: { (task:URLSessionDataTask?, err:Error) -> Void in
+                completion(nil, err)
+        })
+    }
+    
+    func unFavoriteATweet(tweetId: Int64, completion:@escaping (_ resp:AnyObject?, _ error:Error?) ->())
+    {
+        let params = ["id": "\(tweetId)"]
+        post("1.1/favorites/destroy.json", parameters: params, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
+            
+            completion(response as AnyObject? , nil)
+            
+            }, failure: { (task:URLSessionDataTask?, err:Error) -> Void in
+                completion(nil, err)
+        })
+    }
+    
+    func retweetATweet(tweetId: Int64, completion:@escaping (_ response:AnyObject?, _ error:Error?)->())
+    {
+        post("1.1/statuses/retweet/\(tweetId).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
+            
+            completion(response as AnyObject? , nil)
+            
+            }, failure: { (task:URLSessionDataTask?, err:Error) -> Void in
+                completion(nil, err)
+        })
+    }
+    
+    func UndoRetweet(tweetId: Int64, completion:@escaping (_ response:AnyObject?, _ error:Error?)->())
+    {
+        post("1.1/statuses/unretweet/\(tweetId).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
+            completion(response as AnyObject? , nil)
+            }, failure: { (task:URLSessionDataTask?, err:Error) -> Void in
+                completion(nil, err)
+        })
+    }
+    
+    func composeTweet(tweetText: String, inReplyTo:Int64, completion:@escaping (_ response:AnyObject?, _ error:Error?)->())
+    {
+        var params = ["status": tweetText, "in_reply_to_status_id": "\(inReplyTo)"] as [String: Any]
+        if(inReplyTo == 0)
+        {
+            params = ["status": tweetText, "in_reply_to_status_id": ""] as [String: Any]
+        }
+        post("1.1/statuses/update.json", parameters: params, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
+            completion(response as AnyObject? , nil)
+            }, failure: { (task:URLSessionDataTask?, err:Error) -> Void in
+                completion(nil, err)
+        })
     }
     
     func currentAccount(success: @escaping (User) -> (), failure: @escaping (Error) -> ()){
@@ -85,7 +147,5 @@ class TwitterClient: BDBOAuth1SessionManager {
                 print(error)
                 failure(error)
         })
-        
     }
-    
 }

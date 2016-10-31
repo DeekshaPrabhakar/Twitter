@@ -22,7 +22,7 @@ class User: NSObject {
         screenname = dictionary["screen_name"] as? String
         tagline = dictionary["description"] as? String
         
-        let profileUrlString = dictionary["profile_image_url_https"] as? String
+        let profileUrlString = dictionary["profile_image_url"] as? String
         if let profileUrlString = profileUrlString {
             profileUrl = URL(string: profileUrlString)
         }
@@ -38,8 +38,14 @@ class User: NSObject {
                 let userData = defaults.object(forKey: "currentUserData") as? NSData
                 
                 if let userData = userData{
-                    let dataDictionary = try! JSONSerialization.jsonObject(with: userData as Data, options: []) as! NSDictionary
-                    _currentUser = User(dictionary: dataDictionary)
+                    do{
+                        if let dataDictionary = try? JSONSerialization.jsonObject(with: userData as Data, options: []) as?NSDictionary{
+                            _currentUser = User(dictionary: dataDictionary!)
+                        }
+                    }
+                    catch let error as NSError{
+                        print(error)
+                    }
                 }
             }
             return _currentUser
