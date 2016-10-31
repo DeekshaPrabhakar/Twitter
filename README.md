@@ -27,12 +27,14 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [x] Url links clickable in table cell
+- [x] Url links clickable in table cell for photos and videos.
 - [x] Hashtags go to twitter site
 - [x] Mentions go to twitter profile
 - [x] App Icon and Launch image
-- [x] If favorited/unfavorited in detail view, transferred to tweets view. Same for retweet/undo retweet
+- [x] If favorited/unfavorited in detail view, changes visible in tweets view. 
+- [x] If retweet/undo retweet in detail view, changes visible in tweets view.
 - [x] All controls except mail works from tweets and detail view
+- [x] Autolayout for all views
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
@@ -54,9 +56,18 @@ Describe any challenges encountered while building the app.
 - table cell select on textview doesn't respect table cell selection
 
 ##Acknowledgements
-- AFNetworking
-- BDBOAuth1Manager
-- Icons (updated later)
+- <a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a>
+- <a href="https://github.com/bdbergeron/BDBOAuth1Manager">BDBOAuth1Manager</a>
+- <a href="http://stackoverflow.com/questions/35908306/how-to-extract-link-from-uitextview-and-load-image-from-the-link-like-facebook-o"> NSAttributedString</a>
+- Icons 
+    - <div>Icons made by <a href="http://www.flaticon.com/authors/lyolya" title="Lyolya">Lyolya</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    - <div>Icons made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    - <div>Icons made by <a href="http://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    - <div>Icons made by <a href="http://www.flaticon.com/authors/google" title="Google">Google</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    - <div>Icons made by <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    - <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    - <div>Icons made by <a href="http://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    -<div>Icons made by <a href="http://www.flaticon.com/authors/plainicon" title="Plainicon">Plainicon</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
 ## License
 
