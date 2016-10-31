@@ -28,9 +28,11 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] Url links clickable in table cell
-- [x] Hashtags and mentions now go to profile view 
+- [x] Hashtags go to twitter site
+- [x] Mentions go to twitter profile
 - [x] App Icon and Launch image
 - [x] If favorited/unfavorited in detail view, transferred to tweets view. Same for retweet/undo retweet
+- [x] All controls except mail works from tweets and detail view
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
