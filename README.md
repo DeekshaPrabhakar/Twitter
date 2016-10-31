@@ -2,7 +2,7 @@
 
 Twitter is a basic twitter app to read and compose tweets from the [Twitter API](https://apps.twitter.com/).
 
-Time spent: **X** hours spent in total
+Time spent: **25+** hours spent in total
 
 ## User Stories
 
@@ -22,29 +22,33 @@ The following **optional** features are implemented:
 - [x] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
 - [x] Retweeting and favoriting should increment the retweet and favorite count.
 - [x] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
-- [ ] Replies should be prefixed with the username and the reply_id should be set when posting the tweet,
-- [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
+- [x] Replies should be prefixed with the username and the reply_id should be set when posting the tweet,
+- [x] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] Url links clickable in table cell
+- [x] Hashtags and mentions now go to profile view 
+- [x] App Icon and Launch image
+- [x] If favorited/unfavorited in detail view, transferred to tweets view. Same for retweet/undo retweet
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. textview how to interact with table cell properties
+2. navigation bar button profile image
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/DeekshaPrabhakar/Twitter/blob/master/Walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
 Describe any challenges encountered while building the app.
+- textview for rendering rich content
 
 ## License
 
