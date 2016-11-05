@@ -13,9 +13,10 @@ class DescriptionCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
-    @IBOutlet weak var tweetTextLabel: UILabel!
+    //@IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var timestampLabel: UILabel!
     
+    @IBOutlet weak var tweetTextView: UITextView!
     var tweetDetailObj: Tweet! {
         didSet {
             fillCell()
@@ -33,7 +34,13 @@ class DescriptionCell: UITableViewCell {
         nameLabel.text = tweetDetailObj.user?.name
         screenNameLabel.text = "@" + (tweetDetailObj.user?.screenname!)!
         timestampLabel.text = tweetDetailObj.createdAt
-        tweetTextLabel.text = tweetDetailObj.text
+        //tweetTextLabel.text = tweetDetailObj.text
+        tweetTextView.sizeToFit()
+        tweetTextView.layoutIfNeeded()
+        let height = tweetTextView.sizeThatFits(CGSize.init(width: tweetTextView.frame.size.width, height: CGFloat.greatestFiniteMagnitude)).height
+        tweetTextView.contentSize.height = height
+        
+        tweetTextView.attributedText = Tweet.hashTagMentions(str: tweetDetailObj.text!)
         
     }
     
@@ -42,6 +49,7 @@ class DescriptionCell: UITableViewCell {
         
         profileImageView.layer.cornerRadius = 8.0
         profileImageView.clipsToBounds = true
+
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

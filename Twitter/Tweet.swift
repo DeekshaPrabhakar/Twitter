@@ -30,6 +30,7 @@ class Tweet: NSObject {
     var inReplyToScreenName:String?
     var retweetedStatus:NSDictionary?
     var tweetType:TweetType?
+    var retweetedUser:User?
     
     init(dictionary: NSDictionary) {
         text = dictionary["text"] as? String
@@ -54,10 +55,12 @@ class Tweet: NSObject {
         curUserReTweeted =  dictionary["retweeted"] as? Bool
         inReplyToScreenName = dictionary["in_reply_to_screen_name"] as? String
         retweetedStatus = dictionary["retweeted_status"] as? NSDictionary
-        
+
         if(retweetedStatus != nil){
             tweetType = TweetType.Retweet
             print(dictionary["current_user_retweet"])
+            retweetedUser = user
+            user = User(dictionary: retweetedStatus!["user"] as! NSDictionary)
         }
         else if(inReplyToScreenName != nil){
             tweetType = TweetType.Reply
@@ -65,6 +68,7 @@ class Tweet: NSObject {
         else {
             tweetType = TweetType.Original
         }
+        
     }
     
     class func tweetsWithArray(dictionaries:[NSDictionary]) -> [Tweet]{
@@ -105,6 +109,56 @@ class Tweet: NSObject {
         } else {
             return "now"
         }
+    }
+    
+    //http://stackoverflow.com/questions/35908306/how-to-extract-link-from-uitextview-and-load-image-from-the-link-like-facebook-o
+    class func hashTagMentions(str:String) -> NSMutableAttributedString  {
+        let nsText:NSString = str as NSString
+        let words:[String] = nsText.components(separatedBy: " ")
+        
+        let attrs = [
+            NSFontAttributeName : UIFont.systemFont(ofSize: 13.0)
+        ]
+        
+        let attrString = NSMutableAttributedString.init(string: str, attributes: attrs)
+        
+        // tag each word if it has a hashtag
+        for word in words {
+            
+            if word.hasPrefix("#") {
+                
+                // a range is the character position, followed by how many characters are in the word.
+                let matchRange:NSRange = nsText.range(of: word)
+                
+                var stringifiedWord:String = word as String
+                
+                // drop the hashtag
+                stringifiedWord = String(stringifiedWord.characters.dropFirst())
+                
+                let digits = NSCharacterSet.decimalDigits
+                
+                if let numbersExist = stringifiedWord.rangeOfCharacter(from: digits) {
+                    // hashtag contains a number, like "#1"so don't make it clickable
+                } else {
+                    // set a link for when the user clicks on this word.
+                    attrString.addAttribute(NSLinkAttributeName, value: "https://twitter.com/hashtag/\(stringifiedWord)?src=hash", range: matchRange)
+                }
+                
+            }
+            if word.hasPrefix("@") {
+                let matchRange:NSRange = nsText.range(of: word)
+                var stringifiedWord:String = word as String
+                stringifiedWord = String(stringifiedWord.characters.dropFirst())
+                
+                let digits = NSCharacterSet.decimalDigits
+                if let numbersExist = stringifiedWord.rangeOfCharacter(from: digits) {
+                    
+                } else {
+                    attrString.addAttribute(NSLinkAttributeName, value: "https://twitter.com/\(stringifiedWord)", range: matchRange)
+                }
+            }
+        }
+        return attrString
     }
 }
 

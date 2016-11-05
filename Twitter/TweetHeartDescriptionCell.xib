@@ -47,6 +47,7 @@
                     <constraint firstItem="oXI-BG-bby" firstAttribute="leading" secondItem="buy-I2-kPX" secondAttribute="trailing" constant="5" id="xfA-GK-Vf5"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
             <connections>
                 <outlet property="favoriteCountLabel" destination="buy-I2-kPX" id="4lB-fe-Utt"/>
                 <outlet property="retweetCountLabel" destination="7Yn-RR-pMp" id="RkZ-Is-Yjk"/>

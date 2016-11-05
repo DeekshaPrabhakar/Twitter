@@ -15,7 +15,8 @@
                 <frame key="frameInset" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ewa-LZ-Rm4">
+                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ewa-LZ-Rm4">
+                        <frame key="frameInset" width="300" height="43"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESC-Aq-fMZ">
                                 <fontDescription key="fontDescription" type="system" pointSize="1"/>
@@ -56,6 +57,7 @@
                     <constraint firstAttribute="trailing" secondItem="ewa-LZ-Rm4" secondAttribute="trailing" constant="10" id="tt2-Bo-NgK"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="heartButton" destination="HST-4L-dWH" id="sMR-i4-zR3"/>
                 <outlet property="retweetBtn" destination="hq1-aK-S2T" id="ENq-C3-gAw"/>

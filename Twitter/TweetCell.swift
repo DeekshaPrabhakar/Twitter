@@ -18,7 +18,7 @@ class TweetCell: UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var timeStampLabel: UILabel!
-    @IBOutlet weak var tweetTextLabel: UILabel!
+
     @IBOutlet weak var retweetLabel: UILabel!
     @IBOutlet weak var retweetBtn: UIButton!
     @IBOutlet weak var heartButton: UIButton!
@@ -49,14 +49,8 @@ class TweetCell: UITableViewCell, UITextViewDelegate {
         nameLabel.text = cellTweet.user?.name
         usernameLabel.text = "@" + (cellTweet.user?.screenname!)!
         timeStampLabel.text = cellTweet.timestamp
-        //tweetTextLabel.text = cellTweet.text
-        tweetTextView.attributedText = hashTagMentions(str: cellTweet.text!)
+        tweetTextView.attributedText = Tweet.hashTagMentions(str: cellTweet.text!)
         
-//        let contentSize = tweetTextView.sizeThatFits(tweetTextView.bounds.size)
-//        var frame = tweetTextView.frame
-//        frame.size.height = contentSize.height
-//        
-//        CGSize sizeThatFitsTextView = [TextView sizeThatFits:CGSizeMake(TextView.frame.size.width, MAXFLOAT)];
         
         tweetTextView.sizeToFit()
         tweetTextView.layoutIfNeeded()
@@ -64,9 +58,16 @@ class TweetCell: UITableViewCell, UITextViewDelegate {
         tweetTextView.contentSize.height = height
         
         
-        if(cellTweet.tweetType == TweetType.Retweet && cellTweet.curUserReTweeted!){
-            tweetTypeDescriptionLabel.text = "You retweeted"
-            tweetTypeDescriptionImageView.image = UIImage(named: "retweetGreen")
+        if(cellTweet.tweetType == TweetType.Retweet){
+            if(cellTweet.curUserReTweeted!){
+                tweetTypeDescriptionLabel.text = "You retweeted"
+                tweetTypeDescriptionImageView.image = UIImage(named: "retweetGreen")
+            }
+            else{
+                tweetTypeDescriptionLabel.text =  "\((cellTweet.retweetedUser?.name)!) retweeted"
+                tweetTypeDescriptionImageView.image = UIImage(named: "retweetGray")
+            }
+            
             tweetTypeDescriptionLabel.isHidden = false
             tweetTypeDescriptionImageView.isHidden = false
         }
@@ -186,57 +187,6 @@ class TweetCell: UITableViewCell, UITextViewDelegate {
             })
         }
     }
-    
-    //http://stackoverflow.com/questions/35908306/how-to-extract-link-from-uitextview-and-load-image-from-the-link-like-facebook-o
-    func hashTagMentions(str:String) -> NSMutableAttributedString  {
-        let nsText:NSString = str as NSString
-        let words:[String] = nsText.components(separatedBy: " ")
-        
-        let attrs = [
-            NSFontAttributeName : UIFont.systemFont(ofSize: 13.0)
-        ]
-        
-        let attrString = NSMutableAttributedString.init(string: str, attributes: attrs)
-        
-        // tag each word if it has a hashtag
-        for word in words {
-            
-            if word.hasPrefix("#") {
-                
-                // a range is the character position, followed by how many characters are in the word.
-                let matchRange:NSRange = nsText.range(of: word)
-                
-                var stringifiedWord:String = word as String
-                
-                // drop the hashtag
-                stringifiedWord = String(stringifiedWord.characters.dropFirst())
-                
-                let digits = NSCharacterSet.decimalDigits
-                
-                if let numbersExist = stringifiedWord.rangeOfCharacter(from: digits) {
-                    // hashtag contains a number, like "#1"so don't make it clickable
-                } else {
-                    // set a link for when the user clicks on this word.
-                    attrString.addAttribute(NSLinkAttributeName, value: "https://twitter.com/hashtag/\(stringifiedWord)?src=hash", range: matchRange)
-                }
-                
-            }
-            if word.hasPrefix("@") {
-                let matchRange:NSRange = nsText.range(of: word)
-                var stringifiedWord:String = word as String
-                stringifiedWord = String(stringifiedWord.characters.dropFirst())
-                
-                let digits = NSCharacterSet.decimalDigits
-                if let numbersExist = stringifiedWord.rangeOfCharacter(from: digits) {
-                    
-                } else {
-                    attrString.addAttribute(NSLinkAttributeName, value: "https://twitter.com/\(stringifiedWord)", range: matchRange)
-                }
-            }
-        }
-        return attrString
-    }
-    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

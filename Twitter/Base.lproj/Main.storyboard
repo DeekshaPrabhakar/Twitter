@@ -16,30 +16,60 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksS-EC-oQg">
-                                <frame key="frameInset" minX="88" minY="256" width="167" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.11372549019607843" green="0.63137254901960782" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Log in with Twitter">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Welcome to Twitter" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tED-Ui-dBg">
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="TwitterLogoWhiteOnBlue" translatesAutoresizingMaskIntoConstraints="NO" id="W8B-Ha-6zg">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="trs-05-6Bu"/>
+                                    <constraint firstAttribute="width" constant="80" id="u7d-dS-Ui1"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="See what's happening in the world right now" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3w-HH-sya">
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksS-EC-oQg">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                <state key="normal" title="Log in">
+                                    <color key="titleColor" red="0.1137254902" green="0.63137254899999995" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="onLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="41J-YZ-Uhn"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.1137254902" green="0.63137254899999995" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="v3w-HH-sya" firstAttribute="top" secondItem="tED-Ui-dBg" secondAttribute="bottom" constant="30" id="0e2-VB-GvP"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ksS-EC-oQg" secondAttribute="bottom" constant="50" id="1u7-ew-MpU"/>
+                            <constraint firstItem="ksS-EC-oQg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4cy-Yj-4f3"/>
+                            <constraint firstItem="W8B-Ha-6zg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="9OA-m9-CtJ"/>
+                            <constraint firstItem="W8B-Ha-6zg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="40" id="ADj-4M-d7b"/>
+                            <constraint firstItem="ksS-EC-oQg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="50" id="EeF-Oc-x7G"/>
+                            <constraint firstItem="tED-Ui-dBg" firstAttribute="top" secondItem="W8B-Ha-6zg" secondAttribute="bottom" constant="70" id="Evg-0F-4PB"/>
+                            <constraint firstAttribute="trailing" secondItem="v3w-HH-sya" secondAttribute="trailing" constant="50" id="Jgc-f6-5Oz"/>
+                            <constraint firstAttribute="trailing" secondItem="tED-Ui-dBg" secondAttribute="trailing" constant="40" id="dfU-yq-gbu"/>
+                            <constraint firstItem="tED-Ui-dBg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="50" id="dzn-9J-1Y2"/>
+                            <constraint firstAttribute="trailing" secondItem="ksS-EC-oQg" secondAttribute="trailing" constant="50" id="trH-uB-LI1"/>
+                            <constraint firstItem="v3w-HH-sya" firstAttribute="leading" secondItem="tED-Ui-dBg" secondAttribute="leading" id="ysC-RS-WQa"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="ksS-EC-oQg" id="J57-pA-J14"/>
                         <segue destination="peJ-rU-esX" kind="presentation" identifier="loginSegue" id="qwc-hw-fbI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.875" y="137.32394366197184"/>
+            <point key="canvasLocation" x="136.80000000000001" y="137.18140929535232"/>
         </scene>
         <!--Tweets View Controller-->
         <scene sceneID="j9a-SA-fMC">
@@ -50,17 +80,17 @@
                         <viewControllerLayoutGuide type="bottom" id="IO1-GP-5dU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Fdn-Ao-BZe">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="180" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="glv-PW-7iq">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="180" id="WwV-4i-tv5" customClass="TweetCell" customModule="Twitter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="320" height="180"/>
+                                        <rect key="frame" x="0.0" y="92" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WwV-4i-tv5" id="bP6-EU-p3f">
-                                            <frame key="frameInset" width="320" height="179"/>
+                                            <frame key="frameInset" width="375" height="179.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AaH-iU-Oxa">
@@ -267,7 +297,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Z3B-7c-2IG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xTB-Ai-7z3" userLabel="Compose Parent View">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Rw-E6-dq5" userLabel="New Tweet View">
@@ -430,17 +460,17 @@
                         <viewControllerLayoutGuide type="bottom" id="fAf-oz-Hne"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tcF-ei-PkP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="186" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="K0A-PP-Ucp">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="156" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="K0A-PP-Ucp">
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DescriptionCell" rowHeight="186" id="Tda-yi-rS4" customClass="DescriptionCell" customModule="Twitter" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="120" width="320" height="186"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DescriptionCell" rowHeight="156" id="Tda-yi-rS4" customClass="DescriptionCell" customModule="Twitter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="120" width="375" height="156"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tda-yi-rS4" id="11T-23-Eaq">
-                                            <frame key="frameInset" width="320" height="185"/>
+                                            <frame key="frameInset" width="375" height="155"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bg2-pl-OdH">
@@ -459,11 +489,19 @@
                                                     <color key="textColor" red="0.39607843139999999" green="0.46666666670000001" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Can't wait for our customers to try the all-new MacBook Pro and revolutionary Touch Bar!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lp4-Os-78J">
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g8s-V6-Nfw">
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Can't wait for our customers to try the all-new MacBook Pro and revolutionary Touch Bar!">
+                                                            <attributes>
+                                                                <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                </textView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10/28/16, 10:05 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pgp-UY-XZh">
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.39607843139999999" green="0.46666666670000001" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -471,27 +509,27 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="lp4-Os-78J" firstAttribute="leading" secondItem="11T-23-Eaq" secondAttribute="leading" constant="10" id="17n-PP-dOD"/>
-                                                <constraint firstItem="Pgp-UY-XZh" firstAttribute="top" secondItem="lp4-Os-78J" secondAttribute="bottom" constant="10" id="1Nv-67-ClU"/>
+                                                <constraint firstItem="Pgp-UY-XZh" firstAttribute="top" secondItem="g8s-V6-Nfw" secondAttribute="bottom" constant="2" id="2ZX-we-aXf"/>
+                                                <constraint firstItem="Pgp-UY-XZh" firstAttribute="leading" secondItem="bg2-pl-OdH" secondAttribute="leading" id="5g0-3Z-eRV"/>
                                                 <constraint firstItem="2EY-fn-qDe" firstAttribute="top" secondItem="11T-23-Eaq" secondAttribute="top" constant="8" id="B8g-3a-Xk7"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Pgp-UY-XZh" secondAttribute="bottom" constant="10" id="KAK-Uj-gXC"/>
                                                 <constraint firstItem="2EY-fn-qDe" firstAttribute="leading" secondItem="bg2-pl-OdH" secondAttribute="trailing" constant="5" id="M1P-oo-e0j"/>
-                                                <constraint firstItem="Pgp-UY-XZh" firstAttribute="leading" secondItem="11T-23-Eaq" secondAttribute="leading" constant="10" id="OaQ-Jb-Oap"/>
-                                                <constraint firstItem="lp4-Os-78J" firstAttribute="top" secondItem="bg2-pl-OdH" secondAttribute="bottom" constant="8" id="bgw-N2-gaQ"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Pgp-UY-XZh" secondAttribute="bottom" constant="10" id="csF-9S-3o2"/>
-                                                <constraint firstAttribute="trailing" secondItem="lp4-Os-78J" secondAttribute="trailing" constant="10" id="fVw-4Z-ahz"/>
+                                                <constraint firstItem="g8s-V6-Nfw" firstAttribute="top" secondItem="bg2-pl-OdH" secondAttribute="bottom" id="Nco-eh-7IC"/>
+                                                <constraint firstItem="g8s-V6-Nfw" firstAttribute="leading" secondItem="bg2-pl-OdH" secondAttribute="leading" id="TJW-XJ-VMj"/>
                                                 <constraint firstItem="bg2-pl-OdH" firstAttribute="top" secondItem="11T-23-Eaq" secondAttribute="top" constant="8" id="gCh-vd-vas"/>
                                                 <constraint firstItem="gUR-Nf-JDM" firstAttribute="leading" secondItem="2EY-fn-qDe" secondAttribute="leading" id="kaM-ex-hss"/>
                                                 <constraint firstItem="bg2-pl-OdH" firstAttribute="leading" secondItem="11T-23-Eaq" secondAttribute="leading" constant="10" id="pFi-Y2-vmk"/>
                                                 <constraint firstItem="gUR-Nf-JDM" firstAttribute="top" secondItem="2EY-fn-qDe" secondAttribute="bottom" constant="5" id="qVs-LX-ivg"/>
+                                                <constraint firstAttribute="trailing" secondItem="g8s-V6-Nfw" secondAttribute="trailing" constant="10" id="tya-Do-VaZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                        <inset key="separatorInset" minX="12" minY="0.0" maxX="12" maxY="0.0"/>
                                         <connections>
                                             <outlet property="nameLabel" destination="2EY-fn-qDe" id="uix-v7-6NV"/>
                                             <outlet property="profileImageView" destination="bg2-pl-OdH" id="qZq-PQ-GFp"/>
                                             <outlet property="screenNameLabel" destination="gUR-Nf-JDM" id="pKB-8M-Kih"/>
                                             <outlet property="timestampLabel" destination="Pgp-UY-XZh" id="yST-dn-rDG"/>
-                                            <outlet property="tweetTextLabel" destination="lp4-Os-78J" id="ZJx-VP-JRo"/>
+                                            <outlet property="tweetTextView" destination="g8s-V6-Nfw" id="NAK-ZJ-Yji"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -513,7 +551,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ze1-Xx-jdV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2693" y="181"/>
+            <point key="canvasLocation" x="2692" y="180.35982008995504"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZDR-Nf-ugm">
@@ -560,6 +598,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="TwitterLogoWhiteOnBlue" width="200" height="200"/>
         <image name="close" width="24" height="24"/>
         <image name="downarrow" width="16" height="16"/>
         <image name="feather" width="32" height="32"/>
