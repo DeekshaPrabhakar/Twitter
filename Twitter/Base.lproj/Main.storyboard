@@ -100,7 +100,7 @@
                                                 <constraint firstItem="Qed-pR-rbB" firstAttribute="centerY" secondItem="kub-eG-rFe" secondAttribute="centerY" id="yTd-sg-Gsc"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.1137254902" green="0.63137254899999995" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.27450980390000002" green="0.69803921570000005" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="menuImageView" destination="Eaw-yI-ywO" id="hcl-wu-f51"/>
@@ -160,7 +160,7 @@
                                                 <constraint firstAttribute="width" constant="69" id="DiO-bn-RDq"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@bitwaker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dz3-Aw-ooX" userLabel="Yaris username">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@deekshaprabhakar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dz3-Aw-ooX" userLabel="Yaris username">
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                             <color key="textColor" red="0.40000000000000002" green="0.41960784309999999" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -175,12 +175,12 @@
                                                 <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jane Stormtrooper" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnf-YQ-wPw">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deeksha Prabhakar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnf-YQ-wPw">
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@deanbrindley87" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROo-ex-AZB" userLabel="Deans username">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Francisco" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROo-ex-AZB" userLabel="Deans username">
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                             <color key="textColor" red="0.40000000000000002" green="0.41960784309999999" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -200,6 +200,16 @@
                                         <constraint firstItem="Dnf-YQ-wPw" firstAttribute="top" secondItem="OZr-CM-5Qu" secondAttribute="bottom" id="wEv-sZ-w5y"/>
                                     </constraints>
                                 </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="UEf-LP-NV8">
+                                        <rect key="frame" x="0.0" y="201" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UEf-LP-NV8" id="ksB-1B-dtm">
+                                            <frame key="frameInset" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQK-Qh-UfG" userLabel="Segmented view">
                                 <subviews>
@@ -213,8 +223,9 @@
                                         <segments>
                                             <segment title="Tweets"/>
                                             <segment title="Media"/>
+                                            <segment title="Likes"/>
                                         </segments>
-                                        <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <color key="tintColor" red="0.27450980390000002" green="0.69803921570000005" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -853,7 +864,7 @@
         <image name="feather" width="32" height="32"/>
         <image name="heartGray" width="16" height="16"/>
         <image name="mailGray" width="16" height="16"/>
-        <image name="profile" width="85" height="85"/>
+        <image name="profile" width="16" height="16"/>
         <image name="replyGray" width="16" height="16"/>
         <image name="retweetGray" width="16" height="16"/>
         <image name="retweetGreen" width="16" height="16"/>

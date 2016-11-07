@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeTweetViewControllerDelegate, TweetDetailsViewControllerDelegate, UIScrollViewDelegate, TweetCellDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposeTweetViewControllerDelegate, TweetDetailsViewControllerDelegate, UIScrollViewDelegate, TweetCellDelegate, ProfileCellDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var networkErrorView: UIView!
@@ -233,6 +233,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             if(indexPath.row == 0){
                 let cell = tableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as! ProfileCell
                 cell.profile = profileUser
+                cell.profileDelegate = self
                 return cell
             }
             else{
@@ -258,6 +259,15 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func segmentChanged(tweetType: String, controlCell: ProfileCell) {
+        if(tweetType == "Tweets"){
+            
+        }
+        else if(tweetType == "Media"){
+            
+        }
     }
     
     private func showNetworkErrorView(){

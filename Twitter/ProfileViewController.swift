@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, TweetCellDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -37,6 +37,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     let CellIdentifier = "TableViewCell", HeaderViewIdentifier = "TableViewHeaderView"
     
     var profile:User?
+    var tweets:[Tweet]!
     
     func fillCell() {
         //view.layoutIfNeeded()
@@ -55,13 +56,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.dataSource = self
         tableView.delegate = self
         
-        
-         tableView.estimatedRowHeight = 105;
-         tableView.rowHeight = UITableViewAutomaticDimension;
- 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier)
-        
+        tableView.estimatedRowHeight = 105;
+        tableView.rowHeight = UITableViewAutomaticDimension;
+         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier)
         fillCell()
+        getOrRefreshTweets()
         
     }
     
@@ -84,7 +83,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         headerView.clipsToBounds = true
         headerView.isHidden = false
-        tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height + 100, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height , 0, 0, 0)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -92,7 +91,13 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if let tweets = tweets {
+            return tweets.count
+        }
+        else
+        {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,6 +105,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.textLabel?.text = "row \(indexPath.row)"
         return cell
     }
+    
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
@@ -189,7 +196,27 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         
     }
-
+    
+    func getOrRefreshTweets() {
+        
+        let client = TwitterClient.sharedInstance
+        
+        var lowestTweetID = Int64.max
+                  lowestTweetID = 0
+        
+        
+        client.userTimeline(lowestTweetId: lowestTweetID,user_id: (profile?.userID)! ,success: { (tweets:[Tweet]) in
+            
+            self.tweets = tweets
+            self.tableView.reloadData()
+            
+            }, failure: {(error : Error) -> () in
+                //print(error.localizedDescription)
+                
+        })
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
