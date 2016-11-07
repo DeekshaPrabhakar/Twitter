@@ -38,8 +38,31 @@ class AccountsViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.register(addAccountCellNib, forCellReuseIdentifier: addAccountCellIdentifier)
         
         accounts = User.accounts()
-        
+        //setUpNavBar()
         tableView.tableFooterView = UIView()
+    }
+    
+    func setUpNavBar(){
+        if (User.currentUser != nil) {
+                       // set up title with long press gesture recognizer
+            
+            let navLabel = UILabel.init(frame: CGRect(x: 0, y: 0, width: 300, height: 40))
+                navLabel.text = User.currentUser?.name
+            navLabel.textAlignment = NSTextAlignment.center
+            navLabel.textColor = UIColor.black
+            navLabel.isUserInteractionEnabled = true
+            self.navigationItem.titleView = navLabel
+            
+            let longPressGesture = UILongPressGestureRecognizer.init(target: self, action: #selector(onNavBarLongPress))
+            
+           navLabel.addGestureRecognizer(longPressGesture)
+        } else {
+            //self.navigationItem.title = user.name;
+        }
+    }
+    
+    func onNavBarLongPress(){
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,10 +99,10 @@ class AccountsViewController: UIViewController, UITableViewDataSource, UITableVi
         let translation = sender.translation(in: view)
         let velocity = sender.velocity(in: view)
         let indexPath = tableView.indexPathForRow(at: location)
-        
-        panningOnCell = (tableView.cellForRow(at: indexPath!) as! AccountCell)
-        panningOnCell?.onPan(sender: sender, location: location, translation: translation, velocity: velocity)
-        
+        if ((indexPath != nil) && (indexPath?.row)! < User.accounts().count) {
+            panningOnCell = (tableView.cellForRow(at: indexPath!) as! AccountCell)
+            panningOnCell?.onPan(sender: sender, location: location, translation: translation, velocity: velocity)
+        }
     }
     
     func deleteAccount(userToDelete: User, controlCell: AccountCell) {

@@ -15,7 +15,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private var profileNavController:ProfileViewController!
     private var homeTimeLineNavController:UIViewController!
     private var mentionsNavController:UIViewController!
-    private var accountsController:AccountsViewController!
+    private var accountsNavController:UINavigationController!
     
     var viewControllers:[UIViewController] = []
     let titles = ["Home", "Mentions", "Profile","Accounts","Logout"]
@@ -42,14 +42,19 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         homeTimeLineNavController.title = "Home"
         mentionsNavController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
         mentionsNavController.title = "Mentions"
-        accountsController = storyboard.instantiateViewController(withIdentifier: "AccountsViewController") as! AccountsViewController
-        accountsController.accountsVCDelegate = self
+        //accountsNavController = storyboard.instantiateViewController(withIdentifier: "AccountsNavViewController") as! UINavigationController
+        
+        accountsNavController = storyboard.instantiateViewController(withIdentifier: "AccountsNavViewController") as! UINavigationController
+        
+        if let accountsController = accountsNavController.topViewController as? AccountsViewController {
+            accountsController.accountsVCDelegate = self
+        }
         
         
         viewControllers.append(homeTimeLineNavController)
         viewControllers.append(mentionsNavController)
         viewControllers.append(profileNavController)
-        viewControllers.append(accountsController)
+        viewControllers.append(accountsNavController)
         
         hamburgerViewController.contentViewController = homeTimeLineNavController
     }

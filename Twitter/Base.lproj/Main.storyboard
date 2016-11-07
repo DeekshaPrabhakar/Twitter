@@ -283,10 +283,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Sk3-EW-3Ce" secondAttribute="bottom" id="jbO-kZ-Xc9"/>
+                            <constraint firstItem="Sk3-EW-3Ce" firstAttribute="top" secondItem="BXG-oo-AK5" secondAttribute="bottom" constant="-64" id="dyM-sX-xVo"/>
                             <constraint firstItem="Sk3-EW-3Ce" firstAttribute="leading" secondItem="Fd1-0D-4Ve" secondAttribute="leading" id="kmM-oO-D0b"/>
+                            <constraint firstItem="wUF-Rf-y2X" firstAttribute="top" secondItem="Sk3-EW-3Ce" secondAttribute="bottom" id="nNe-l7-DIe"/>
                             <constraint firstAttribute="trailing" secondItem="Sk3-EW-3Ce" secondAttribute="trailing" id="s05-rZ-7sE"/>
-                            <constraint firstItem="Sk3-EW-3Ce" firstAttribute="top" secondItem="Fd1-0D-4Ve" secondAttribute="top" constant="20" id="xuE-un-ahL"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="0tQ-HY-aiN" appends="YES" id="JKF-Ik-29a"/>
@@ -304,7 +304,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3851" y="-415"/>
+            <point key="canvasLocation" x="4846.875" y="-415.14084507042253"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -848,6 +848,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1GL-Rj-Xpo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2049" y="381"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jXF-2U-7ZU">
+            <objects>
+                <navigationController storyboardIdentifier="AccountsNavViewController" automaticallyAdjustsScrollViewInsets="NO" id="JAz-e2-cQi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tOH-RJ-NsQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.90980392160000001" green="0.96078431369999995" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ARI-71-eJ9" kind="relationship" relationship="rootViewController" id="hf3-Yr-81p"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NQd-Be-hLa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3849.375" y="-415.14084507042253"/>
         </scene>
     </scenes>
     <resources>
