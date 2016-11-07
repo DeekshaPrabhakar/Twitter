@@ -15,19 +15,13 @@ import UIKit
 class ComposeTweetViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var replyToLabel: UILabel!
-    @IBOutlet weak var replyToView: UIView!
-    
+    @IBOutlet weak var replyToStackView: UIStackView!
     @IBOutlet weak var toolBarView: UIView!
     @IBOutlet weak var tweetButton: UIButton!
     @IBOutlet weak var toolbarView: UIView!
     @IBOutlet weak var tweetCountLabel: UILabel!
     @IBOutlet weak var composeTweetTextView: UITextView!
-    
-    @IBOutlet weak var newTweetView: UIView!
-    
-    @IBOutlet weak var newTweetProfileImage: UIImageView!
-    @IBOutlet weak var newTweetUserNameLabel: UILabel!
-    @IBOutlet weak var newTweetScreenNameLabel: UILabel!
+    @IBOutlet weak var replyToStackHeightConstraint: NSLayoutConstraint!
     
     let client = TwitterClient.sharedInstance
     
@@ -44,41 +38,65 @@ class ComposeTweetViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureNavBar()
         composeTweetTextView.delegate = self
         
         tweetButton.layer.cornerRadius = 5
         tweetButton.clipsToBounds = true
         self.automaticallyAdjustsScrollViewInsets = false
         tweetButton.isEnabled = false
-        
-        if User.currentUser?.profileUrl != nil {
-            newTweetProfileImage.alpha = 0
-            UIView.animate(withDuration: 0.4, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                self.newTweetProfileImage.setImageWith((User.currentUser?.profileUrl!)!)
-                self.newTweetProfileImage.alpha = 1
-                }, completion: nil)
-        }
-        newTweetUserNameLabel.text = User.currentUser?.name
-        newTweetScreenNameLabel.text = "@" + (User.currentUser?.screenname!)!
+        tweetButton.backgroundColor = UIColor.white
+        tweetButton.layer.borderColor = UIColor.lightGray.cgColor
+        tweetButton.layer.borderWidth = 0.5
         
         if(segueIdentifier == "NewTweet"){
             composeTweetTextView.text = "What's happening?"
             composeTweetTextView.textColor = UIColor.lightGray
-            replyToView.isHidden = true
+            replyToStackHeightConstraint.constant = 0
+            view.layoutIfNeeded()
+            composeTweetTextView.becomeFirstResponder()
         }
         else{
             if let replyTweet = replyTweet {
-                replyToView.isHidden = false
+                replyToStackHeightConstraint.constant = 30
+                view.layoutIfNeeded()
                 replyToTweetPrefix = "@\((replyTweet.user?.screenname)!)"
                 replyToLabel.text = "In reply to \((replyTweet.user?.screenname)!)"
                 composeTweetTextView.text = replyToTweetPrefix! + " "
                 composeTweetTextView.textColor = UIColor.black
                 composeTweetTextView.becomeFirstResponder()
+                
             }
         }
         
         setUpLoadingIndicator()
         hideLoadingIndicator()
+    }
+    
+    func configureNavBar(){
+        
+        if let profileImageUrl = User.currentUser?.profileUrl{
+       
+            let profileImage = UIImage()
+            let profileImageView = UIImageView(image: profileImage)
+            profileImageView.setImageWith(profileImageUrl)
+            profileImageView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            
+            profileImageView.layer.cornerRadius = 3
+            profileImageView.layer.masksToBounds = true
+            
+            let leftbarButton = UIBarButtonItem.init(customView: profileImageView)
+            self.navigationItem.leftBarButtonItem = leftbarButton
+        }
+        
+        let closeImageView = UIImageView(image: UIImage(named: "close"))
+        closeImageView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        let rightbarButton = UIBarButtonItem.init(customView: closeImageView)
+        self.navigationItem.rightBarButtonItem = rightbarButton
+        
+        let closeTap = UITapGestureRecognizer(target: self, action: #selector(onCancelCompose))
+        closeTap.numberOfTapsRequired = 1
+        closeImageView.addGestureRecognizer(closeTap)
     }
     
     @IBAction func onComposeTweet(_ sender: AnyObject) {
@@ -117,13 +135,15 @@ class ComposeTweetViewController: UIViewController, UITextViewDelegate {
         
         if(currentLength > 0){
             tweetButton.backgroundColor = UIColor.init(red: CGFloat(29)/255, green: CGFloat(161)/255, blue: CGFloat(242)/255, alpha: 1)
-            //            tweetButton.tintColor = UIColor.white
+            tweetButton.tintColor = UIColor.white
             tweetButton.isEnabled = true
+            tweetButton.layer.borderColor = UIColor.init(red: CGFloat(29)/255, green: CGFloat(161)/255, blue: CGFloat(242)/255, alpha: 1).cgColor
         }
         else{
-            tweetButton.backgroundColor = UIColor.lightGray
-            //            tweetButton.tintColor = UIColor.lightGray
+             tweetButton.backgroundColor = UIColor.white
+             tweetButton.tintColor = UIColor.lightGray
             tweetButton.isEnabled = false
+            tweetButton.layer.borderColor = UIColor.lightGray.cgColor
         }
         
         if(range.length + range.location > currentLength)
@@ -155,9 +175,10 @@ class ComposeTweetViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    @IBAction func onCancel(_ sender: AnyObject) {
+    func onCancelCompose(){
         dismiss(animated: true, completion: nil)
     }
+    
     
     private func setUpLoadingIndicator(){
         var middleY = UIScreen.main.bounds.size.height/2;

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AccountCell" rowHeight="100" id="KGk-i7-Jjw" customClass="AccountCell" customModule="Twitter" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="99"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T6X-dS-w1X">
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deeksha Prabhakar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gtJ-4g-sJc">
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@deekshaprabhaka" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfd-o0-hNC">
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" red="0.39607843139999999" green="0.46666666670000001" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wrw-m1-b47">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="M9h-Gu-C6P"/>
+                                    <constraint firstAttribute="height" constant="70" id="PiA-UQ-7EZ"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Wrw-m1-b47" firstAttribute="leading" secondItem="T6X-dS-w1X" secondAttribute="leading" constant="8" id="HAG-r6-kfQ"/>
+                            <constraint firstItem="gtJ-4g-sJc" firstAttribute="top" secondItem="Wrw-m1-b47" secondAttribute="top" id="LLf-tv-W72"/>
+                            <constraint firstAttribute="height" constant="100" id="TNa-U1-QdH"/>
+                            <constraint firstItem="gtJ-4g-sJc" firstAttribute="leading" secondItem="Wrw-m1-b47" secondAttribute="trailing" constant="10" id="aoF-t4-ejP"/>
+                            <constraint firstItem="Wrw-m1-b47" firstAttribute="centerY" secondItem="T6X-dS-w1X" secondAttribute="centerY" id="cxb-6a-rqm"/>
+                            <constraint firstItem="Yfd-o0-hNC" firstAttribute="leading" secondItem="Wrw-m1-b47" secondAttribute="trailing" constant="10" id="jhM-fz-hVq"/>
+                            <constraint firstItem="Yfd-o0-hNC" firstAttribute="top" secondItem="gtJ-4g-sJc" secondAttribute="bottom" constant="5" id="qBB-73-cqF"/>
+                            <constraint firstAttribute="trailing" secondItem="gtJ-4g-sJc" secondAttribute="trailing" constant="8" id="tr5-zO-OB7"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="0.96078431372549022" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="T6X-dS-w1X" secondAttribute="bottom" id="YSy-wI-zws"/>
+                    <constraint firstItem="T6X-dS-w1X" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="bQa-R2-shs"/>
+                    <constraint firstItem="T6X-dS-w1X" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="piJ-gh-5O5"/>
+                    <constraint firstItem="T6X-dS-w1X" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="r0m-Zf-4j7"/>
+                    <constraint firstAttribute="trailing" secondItem="T6X-dS-w1X" secondAttribute="trailing" id="t7a-DP-GDx"/>
+                    <constraint firstItem="T6X-dS-w1X" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="v4D-4k-h7y"/>
+                    <constraint firstItem="T6X-dS-w1X" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ww1-jD-lDv"/>
+                    <constraint firstItem="T6X-dS-w1X" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="yPJ-f0-Z6N"/>
+                </constraints>
+            </tableViewCellContentView>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="accountImageView" destination="Wrw-m1-b47" id="kIG-Z9-Uyp"/>
+                <outlet property="accountNameLabel" destination="gtJ-4g-sJc" id="FJO-ai-Ce2"/>
+                <outlet property="accountScreenNameLabel" destination="Yfd-o0-hNC" id="8bs-iT-p74"/>
+                <outlet property="accountView" destination="T6X-dS-w1X" id="Hah-pR-Tcz"/>
+                <outlet property="accountViewXConstraint" destination="bQa-R2-shs" id="eFE-Po-mji"/>
+            </connections>
+            <point key="canvasLocation" x="35" y="82"/>
+        </tableViewCell>
+    </objects>
+</document>

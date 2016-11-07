@@ -23,6 +23,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     var loadingMoreView:InfiniteScrollActivityView?
     var resultsPageOffset = 0
     
+    var vcTypeOrEndpoint:String!
+    var profileUser:User?
+    let profileCellIdentifier = "ProfileCell"
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +39,26 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
+        
+        if(self.parent?.title == "Mentions"){
+            vcTypeOrEndpoint = "Mentions"
+        }
+        else if(self.parent?.title == "Home"){
+            vcTypeOrEndpoint = "Home"
+        }
+        else if(self.parent?.title == "Profile"){
+            vcTypeOrEndpoint = "Profile"
+        }
+        
+        if profileUser == nil{
+            profileUser = User.currentUser
+        }
+        
+        tableView.tableFooterView = UIView()
+        
+        //ProfileCell
+        let profileCellNib = UINib(nibName: "ProfileCell", bundle: nil)
+        tableView.register(profileCellNib, forCellReuseIdentifier: profileCellIdentifier)
         
         setupScrollLoadingMoreIndicator()
         hideNetworkErrorView()
@@ -62,28 +87,76 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             lowestTweetID = 0
         }
         
-        
-        client.homeTimeline(lowestTweetId: lowestTweetID, success: { (tweets:[Tweet]) in
+        if(vcTypeOrEndpoint == "Home"){
             
-            self.refreshControl.endRefreshing()
-            
-            if(self.isMoreDataLoading){
-                self.isMoreDataLoading = false
-                self.tweets.append(contentsOf: tweets)
-                self.loadingMoreView!.stopAnimating()
-            }
-            else{
-                self.tweets = tweets
-            }
-            self.tableView.reloadData()
-            self.hideLoadingIndicator()
-            
-            }, failure: {(error : Error) -> () in
-                //print(error.localizedDescription)
+            client.homeTimeline(lowestTweetId: lowestTweetID, success: { (tweets:[Tweet]) in
+                
+                self.refreshControl.endRefreshing()
+                if(self.isMoreDataLoading){
+                    self.isMoreDataLoading = false
+                    self.tweets.append(contentsOf: tweets)
+                    self.loadingMoreView!.stopAnimating()
+                }
+                else{
+                    self.tweets = tweets
+                }
+                self.tableView.reloadData()
                 self.hideLoadingIndicator()
-                self.showNetworkErrorView()
-                self.loadingMoreView!.stopAnimating()
-        })
+                
+                }, failure: {(error : Error) -> () in
+                    //print(error.localizedDescription)
+                    self.hideLoadingIndicator()
+                    self.showNetworkErrorView()
+                    self.loadingMoreView!.stopAnimating()
+            })
+            
+        }
+        else if(vcTypeOrEndpoint == "Mentions"){
+            
+            client.userMentions(lowestTweetId: lowestTweetID, success: { (tweets:[Tweet]) in
+                
+                self.refreshControl.endRefreshing()
+                if(self.isMoreDataLoading){
+                    self.isMoreDataLoading = false
+                    self.tweets.append(contentsOf: tweets)
+                    self.loadingMoreView!.stopAnimating()
+                }
+                else{
+                    self.tweets = tweets
+                }
+                self.tableView.reloadData()
+                self.hideLoadingIndicator()
+                
+                }, failure: {(error : Error) -> () in
+                    //print(error.localizedDescription)
+                    self.hideLoadingIndicator()
+                    self.showNetworkErrorView()
+                    self.loadingMoreView!.stopAnimating()
+            })
+        }//end of mentions
+        else if(vcTypeOrEndpoint == "Profile"){
+            
+            client.userTimeline(lowestTweetId: lowestTweetID,user_id: (profileUser?.userID)! ,success: { (tweets:[Tweet]) in
+                
+                self.refreshControl.endRefreshing()
+                if(self.isMoreDataLoading){
+                    self.isMoreDataLoading = false
+                    self.tweets.append(contentsOf: tweets)
+                    self.loadingMoreView!.stopAnimating()
+                }
+                else{
+                    self.tweets = tweets
+                }
+                self.tableView.reloadData()
+                self.hideLoadingIndicator()
+                
+                }, failure: {(error : Error) -> () in
+                    //print(error.localizedDescription)
+                    self.hideLoadingIndicator()
+                    self.showNetworkErrorView()
+                    self.loadingMoreView!.stopAnimating()
+            })
+        }//end of Profile
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -121,10 +194,28 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tweetReplied(updatedCellTweet: Tweet, controlCell: TweetCell) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ComposeViewController") as! ComposeTweetViewController
-        vc.replyTweet = updatedCellTweet
-        vc.newTweetDelegate = self
+        
+        let vc = storyboard.instantiateViewController(withIdentifier: "ComposeViewNavController") as! UINavigationController
+        
+        if let composeViewController = vc.topViewController as? ComposeTweetViewController {
+            composeViewController.replyTweet = updatedCellTweet
+            composeViewController.newTweetDelegate = self
+        }
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    func tweetProfileTap(updatedCellTweet: Tweet, controlCell: TweetCell) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let vc = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController") as! UINavigationController
+        
+        if let profileViewController = vc.topViewController as? TweetsViewController {
+            profileViewController.profileUser = updatedCellTweet.user
+            profileViewController.vcTypeOrEndpoint = "Profile"
+            self.navigationController?.title = "Profile"
+            self.navigationController?.pushViewController(profileViewController, animated: true)
+        }    
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -138,17 +229,35 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
-        
-        let tweetObj = tweets[indexPath.row]
-        cell.cellTweet = tweetObj
-        cell.cellDelegate = self
-        //cell.tweetTextView.delegate = self
-        return cell
+        if(vcTypeOrEndpoint == "Profile"){
+            if(indexPath.row == 0){
+                let cell = tableView.dequeueReusableCell(withIdentifier: profileCellIdentifier, for: indexPath) as! ProfileCell
+                cell.profile = profileUser
+                return cell
+            }
+            else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+                
+                let tweetObj = tweets[indexPath.row - 1]
+                cell.cellTweet = tweetObj
+                cell.cellDelegate = self
+                //cell.tweetTextView.delegate = self
+                return cell
+            }
+        }
+        else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+            
+            let tweetObj = tweets[indexPath.row]
+            cell.cellTweet = tweetObj
+            cell.cellDelegate = self
+            //cell.tweetTextView.delegate = self
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let a = indexPath
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     private func showNetworkErrorView(){

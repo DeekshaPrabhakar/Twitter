@@ -31,6 +31,8 @@ class Tweet: NSObject {
     var retweetedStatus:NSDictionary?
     var tweetType:TweetType?
     var retweetedUser:User?
+    var mediaUrl:URL?
+    var mediaEntities:NSDictionary?
     
     init(dictionary: NSDictionary) {
         text = dictionary["text"] as? String
@@ -67,6 +69,12 @@ class Tweet: NSObject {
         }
         else {
             tweetType = TweetType.Original
+        }
+        
+        mediaEntities = dictionary["entities"] as? NSDictionary
+        if let mediaNode = mediaEntities?["media"] as? NSDictionary{
+            let mediaUrlNode = mediaNode[0] as! NSDictionary
+            mediaUrl = URL(string : mediaUrlNode["media_url_https"] as! String)
         }
         
     }

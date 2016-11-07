@@ -12,6 +12,9 @@ import BDBOAuth1Manager
 class TwitterClient: BDBOAuth1SessionManager {
     
     static let sharedInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com") as URL!, consumerKey: "mDfbHJSlu1nN1up1HggY92aQ9", consumerSecret: "fKSAb4J1aVDjgYXRUNd4r7EjYvp3Zb4IggW9QmSa8L2tBOM5uk")!
+    static let newSharedInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com") as URL!, consumerKey: "mDfbHJSlu1nN1up1HggY92aQ9", consumerSecret: "fKSAb4J1aVDjgYXRUNd4r7EjYvp3Zb4IggW9QmSa8L2tBOM5uk")!
+    
+    
     var loginSuccess:(() -> ())?
     var loginFailure:((Error) -> ())?
     
@@ -21,6 +24,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         loginFailure = failure
         
         TwitterClient.sharedInstance.deauthorize() //clears keychain of previous sessions
+        
         self.requestSerializer.removeAccessToken()
         
         TwitterClient.sharedInstance.fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: NSURL(string: "deekshaTwitter://oauth") as URL!, scope: nil, success: { (requestToken: BDBOAuth1Credential?) in
@@ -33,10 +37,41 @@ class TwitterClient: BDBOAuth1SessionManager {
                 self.loginFailure?(error!)
         })
     }
-    
-    func  logout() {
-        User.currentUser = nil
+
+    func loginUser(type:String, success:@escaping () -> (), failure:@escaping (Error) -> ()){
+        
+        loginSuccess = success
+        loginFailure = failure
+        
+        TwitterClient.sharedInstance.deauthorize() //clears keychain of previous sessions
+        
+        self.requestSerializer.removeAccessToken()
+        
+        TwitterClient.sharedInstance.fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: NSURL(string: "deekshaTwitter://oauth") as URL!, scope: nil, success: { (requestToken: BDBOAuth1Credential?) in
+            print("got token")
+            let url = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken!.token!)")!
+            UIApplication.shared.open(url as URL!, options: [:], completionHandler: { (success: Bool) in
+                //print
+            })
+            }, failure: { (error:Error?) in
+                self.loginFailure?(error!)
+        })
+    }
+
+    func logout() {
+        //User.removeUser(user: User.currentUser!)
+        //User.currentUser = nil
         deauthorize()
+        requestSerializer.removeAccessToken()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil)
+    }
+    
+    func logoutUser(user: User) {
+        //User.removeUser(user: user)
+         //User.currentUser = nil
+        User.setCurrentUser(user: nil)
+        deauthorize()
+        requestSerializer.removeAccessToken()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil)
     }
     
@@ -47,7 +82,8 @@ class TwitterClient: BDBOAuth1SessionManager {
         fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken:BDBOAuth1Credential?) -> Void in
             self.requestSerializer.saveAccessToken(accessToken)
             self.currentAccount(success: { (user:User) in
-                User.currentUser = user
+                //User.currentUser = user
+                User.setCurrentUser(user: user)
                 self.loginSuccess?()
                 
                 }, failure: { (error:Error) in
@@ -77,6 +113,46 @@ class TwitterClient: BDBOAuth1SessionManager {
                 failure(err)
         })
     }
+
+    func userTimeline(lowestTweetId: Int64, user_id: Int64, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()){
+     
+        var qParams = ["count": 20, "user_id" : user_id] as [String: Any]
+        
+        if(lowestTweetId != 0){
+            qParams = ["count": 20, "user_id" : user_id, "max_id" : String(lowestTweetId)] as [String: Any]
+        }
+        
+        get("1.1/statuses/user_timeline.json", parameters: qParams, progress: nil, success: { (task:URLSessionDataTask, response:Any?) -> Void in
+            
+            let dictionaries = response as! [NSDictionary]
+            let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+            success(tweets)
+            
+            }, failure: { (tsk:URLSessionDataTask?, err:Error) -> Void in
+                failure(err)
+        })
+    }
+
+    
+    func userMentions(lowestTweetId: Int64, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()){
+        
+        var qParams = ["count": 20] as [String: Any]
+        
+        if(lowestTweetId != 0){
+            qParams = ["count": 20, "max_id" : String(lowestTweetId)] as [String: Any]
+        }
+      
+        get("1.1/statuses/mentions_timeline.json", parameters: qParams, progress: nil, success: { (task:URLSessionDataTask, response:Any?) -> Void in
+            
+            let dictionaries = response as! [NSDictionary]
+            let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+            success(tweets)
+            
+            }, failure: { (tsk:URLSessionDataTask?, err:Error) -> Void in
+                failure(err)
+        })
+    }
+
     
     func favoriteATweet(tweetId: Int64, completion:@escaping (_ resp:AnyObject?, _ error:Error?) ->())
     {

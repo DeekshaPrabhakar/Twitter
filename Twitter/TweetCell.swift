@@ -10,6 +10,7 @@ import UIKit
 
 @objc protocol TweetCellDelegate {
     @objc optional func tweetReplied(updatedCellTweet: Tweet, controlCell: TweetCell)
+    @objc optional func tweetProfileTap(updatedCellTweet: Tweet, controlCell: TweetCell)
 }
 
 class TweetCell: UITableViewCell, UITextViewDelegate {
@@ -38,6 +39,8 @@ class TweetCell: UITableViewCell, UITextViewDelegate {
     let client = TwitterClient.sharedInstance
     weak var cellDelegate:TweetCellDelegate?
     
+    var profileNavController:UIViewController!
+    
     func fillCell() {
         if cellTweet.user?.profileUrl != nil {
             profileImageView.alpha = 0
@@ -45,6 +48,7 @@ class TweetCell: UITableViewCell, UITextViewDelegate {
                 self.profileImageView.setImageWith((self.cellTweet.user?.profileUrl!)!)
                 self.profileImageView.alpha = 1
                 }, completion: nil)
+
         }
         nameLabel.text = cellTweet.user?.name
         usernameLabel.text = "@" + (cellTweet.user?.screenname!)!
@@ -86,7 +90,9 @@ class TweetCell: UITableViewCell, UITextViewDelegate {
         updateFavoriteView()
         updateRetweetView()
     }
-    
+    @IBAction func onProfileButton(_ sender: AnyObject) {
+         cellDelegate?.tweetProfileTap!(updatedCellTweet: cellTweet, controlCell: self)
+    }
     
     func updateFavoriteView(){
         if(cellTweet.curUserFavorited!){
