@@ -36,6 +36,7 @@ The following **additional** features are implemented:
 - [x] Login View UI matches the real app
 - [x] Detail view also shows hyperlinks, mentions and hashtags 
 - [x] Profile page animation like app done only for current user. Cant be extended to any profile view.
+- [x] Retweet description updated to handle any user retweet rather than only signed in user
 - [x] Accounts and Logout added to hamburger menu
 - [x] Accounts add and switch everything else wired up except model.
 - [x] Url links clickable in table cell for photos and videos.
