@@ -99,10 +99,11 @@ class AccountsViewController: UIViewController, UITableViewDataSource, UITableVi
         let translation = sender.translation(in: view)
         let velocity = sender.velocity(in: view)
         let indexPath = tableView.indexPathForRow(at: location)
-        if ((indexPath != nil) && (indexPath?.row)! < User.accounts().count) {
-            panningOnCell = (tableView.cellForRow(at: indexPath!) as! AccountCell)
+        
+        //if((indexPath?.row)! < User.accounts().count + 1) {
+            panningOnCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! AccountCell
             panningOnCell?.onPan(sender: sender, location: location, translation: translation, velocity: velocity)
-        }
+        //}
     }
     
     func deleteAccount(userToDelete: User, controlCell: AccountCell) {
