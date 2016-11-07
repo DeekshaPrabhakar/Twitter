@@ -34,8 +34,10 @@ The following **additional** features are implemented:
 
 - [x] Compose and reply view nav bar and tweet buttonmatches the real app
 - [x] Login View UI matches the real app
+- [x] Detail view also shows hyperlinks, mentions and hashtags 
 - [x] Profile page animation like app done only for current user. Cant be extended to any profile view.
 - [x] Accounts and Logout added to hamburger menu
+- [x] Accounts add and switch everything else wired up except model.
 - [x] Url links clickable in table cell for photos and videos.
 - [x] Hashtags go to twitter site
 - [x] Mentions go to twitter profile
@@ -54,15 +56,15 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/DeekshaPrabhakar/Twitter/blob/master/Walkthrough3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/DeekshaPrabhakar/Twitter/blob/master/Walkthrough4.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
 Describe any challenges encountered while building the app.
-- textview for rendering rich content
-- table cell select on textview doesn't respect table cell selection
+- Session manager to store and switch accounts
+- profile view animations
 
 ##Acknowledgements
 - <a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a>
