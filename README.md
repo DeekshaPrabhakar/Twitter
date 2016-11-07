@@ -20,11 +20,11 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Profile Page
+- [x] Profile Page
    - [ ] Implement the paging view for the user description.
    - [ ] As the paging view moves, increase the opacity of the background screen. See the actual Twitter app for this effect
-   - [ ] Pulling down the profile page should blur and resize the header image.
-- [ ] Account switching
+   - [x] Pulling down the profile page should blur and resize the header image.
+- [x] Account switching
    - [ ] Long press on tab bar to bring up Account view with animation
    - [ ] Tap account to switch to
    - [ ] Include a plus button to Add an Account
@@ -32,7 +32,10 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [x] Compose view and UI cleaned to match the real app
+- [x] Compose and reply view nav bar and tweet buttonmatches the real app
+- [x] Login View UI matches the real app
+- [x] Profile page animation like app done only for current user. Cant be extended to any profile view.
+- [x] Accounts and Logout added to hamburger menu
 - [x] Url links clickable in table cell for photos and videos.
 - [x] Hashtags go to twitter site
 - [x] Mentions go to twitter profile
@@ -44,14 +47,14 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. textview how to interact with table cell properties
-2. navigation bar button profile image
+1. Code refactoring
+2. UI Animation and switching user accounts
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/DeekshaPrabhakar/Twitter/blob/master/Walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/DeekshaPrabhakar/Twitter/blob/master/Walkthrough3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
