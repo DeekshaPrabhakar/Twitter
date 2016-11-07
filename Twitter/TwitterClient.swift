@@ -12,8 +12,11 @@ import BDBOAuth1Manager
 class TwitterClient: BDBOAuth1SessionManager {
     
     static let sharedInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com") as URL!, consumerKey: "mDfbHJSlu1nN1up1HggY92aQ9", consumerSecret: "fKSAb4J1aVDjgYXRUNd4r7EjYvp3Zb4IggW9QmSa8L2tBOM5uk")!
-    static let newSharedInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com") as URL!, consumerKey: "mDfbHJSlu1nN1up1HggY92aQ9", consumerSecret: "fKSAb4J1aVDjgYXRUNd4r7EjYvp3Zb4IggW9QmSa8L2tBOM5uk")!
-    
+   
+    class func getNewInstance() -> TwitterClient{
+        let instance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com") as URL!, consumerKey: "mDfbHJSlu1nN1up1HggY92aQ9", consumerSecret: "fKSAb4J1aVDjgYXRUNd4r7EjYvp3Zb4IggW9QmSa8L2tBOM5uk")!
+        return instance
+    }
     
     var loginSuccess:(() -> ())?
     var loginFailure:((Error) -> ())?

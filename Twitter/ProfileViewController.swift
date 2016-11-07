@@ -28,16 +28,20 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var screenNameLabel: UILabel!
     
     @IBOutlet weak var locationLabel: UILabel!
+    
+    @IBOutlet weak var followingCountLabel: UILabel!
+    
+    @IBOutlet weak var followersCountLabel: UILabel!
     var headerBlurImageView:UIImageView!
     var headerImageView:UIImageView!
     
     let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations
     let distance_W_LabelHeader:CGFloat = 30.0 // The distance between the top of the screen and the top of the White Label
     
-    let CellIdentifier = "TableViewCell", HeaderViewIdentifier = "TableViewHeaderView"
     
     var profile:User?
     var tweets:[Tweet]!
+    let singleTweetCellIdentifier = "SingleTweetCell"
     
     func fillCell() {
         //view.layoutIfNeeded()
@@ -48,7 +52,10 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         nameLabelHandle.text = profile!.name
         headerLabel.text = profile!.name
         screenNameLabel.text = "@" + (profile!.screenname!)
-        locationLabel.text = profile!.location
+        //locationLabel.text = profile!.location
+        // followingCountLabel.text = "\(profile!.followingCount)"
+        //followersCountLabel.text = "\(profile!.followersCount)"
+        
     }
     
     override func viewDidLoad() {
@@ -58,7 +65,16 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         
         tableView.estimatedRowHeight = 105;
         tableView.rowHeight = UITableViewAutomaticDimension;
-         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier)
+        
+        //SingleTweetCell
+        let singleTweetCellNib = UINib(nibName: "SingleTweetCell", bundle: nil)
+        tableView.register(singleTweetCellNib, forCellReuseIdentifier: singleTweetCellIdentifier)
+        
+        profileImageView.layer.cornerRadius = 6
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.layer.borderWidth = 3
+        profileImageView.layer.masksToBounds = true
+        
         fillCell()
         getOrRefreshTweets()
         
@@ -76,7 +92,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         // Header - Blurred Image
         headerBlurImageView = UIImageView(frame: headerView.bounds)
         // headerBlurImageView?.image = UIImage(named: "header_bg")?.blurredImage(withRadius: 10, iterations: 20, tintColor: UIColor.clear)
+        
         headerBlurImageView.setImageWith(profile!.bannerImageUrl!)
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = headerBlurImageView!.bounds
+        
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        headerBlurImageView?.addSubview(blurEffectView)
+
         headerBlurImageView?.contentMode = UIViewContentMode.scaleAspectFill
         headerBlurImageView?.alpha = 0.0
         headerView.insertSubview(headerBlurImageView, belowSubview: headerLabel)
@@ -101,9 +125,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier, for: indexPath) as UITableViewCell
-        cell.textLabel?.text = "row \(indexPath.row)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: singleTweetCellIdentifier, for: indexPath) as! SingleTweetCell
+        
+        let tweetObj = tweets[indexPath.row]
+        cell.cellTweet = tweetObj
+        //cell.cellDelegate = self
+        //cell.tweetTextView.delegate = self
         return cell
+        
     }
     
     
@@ -202,7 +231,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         let client = TwitterClient.sharedInstance
         
         var lowestTweetID = Int64.max
-                  lowestTweetID = 0
+        lowestTweetID = 0
         
         
         client.userTimeline(lowestTweetId: lowestTweetID,user_id: (profile?.userID)! ,success: { (tweets:[Tweet]) in

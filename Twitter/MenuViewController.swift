@@ -51,7 +51,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         viewControllers.append(profileNavController)
         viewControllers.append(accountsController)
         
-        hamburgerViewController.contentViewController = profileNavController
+        hamburgerViewController.contentViewController = homeTimeLineNavController
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

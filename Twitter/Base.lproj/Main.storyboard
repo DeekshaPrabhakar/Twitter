@@ -160,11 +160,6 @@
                                                 <constraint firstAttribute="width" constant="69" id="DiO-bn-RDq"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@deekshaprabhakar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dz3-Aw-ooX" userLabel="Yaris username">
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                            <color key="textColor" red="0.40000000000000002" green="0.41960784309999999" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKm-xt-mC1" userLabel="FollowButton" customClass="TWTButton" customModule="Twitter" customModuleProvider="target">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="112" id="CTj-9Y-KgO"/>
@@ -180,7 +175,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Francisco" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROo-ex-AZB" userLabel="Deans username">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@deekshaprabhakar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dz3-Aw-ooX" userLabel="Yaris username">
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                             <color key="textColor" red="0.40000000000000002" green="0.41960784309999999" blue="0.49803921569999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -188,11 +183,9 @@
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstItem="ROo-ex-AZB" firstAttribute="top" secondItem="dz3-Aw-ooX" secondAttribute="bottom" id="1JD-23-28W"/>
                                         <constraint firstItem="OZr-CM-5Qu" firstAttribute="top" secondItem="pig-rF-tCC" secondAttribute="top" constant="-26" id="5LE-nQ-VLd"/>
                                         <constraint firstItem="dz3-Aw-ooX" firstAttribute="leading" secondItem="pig-rF-tCC" secondAttribute="leadingMargin" id="67p-qP-NCU"/>
                                         <constraint firstAttribute="bottom" secondItem="dz3-Aw-ooX" secondAttribute="bottom" constant="97" id="I3h-au-tsC"/>
-                                        <constraint firstItem="dz3-Aw-ooX" firstAttribute="leading" secondItem="ROo-ex-AZB" secondAttribute="leading" id="SVp-bO-zYS"/>
                                         <constraint firstItem="OZr-CM-5Qu" firstAttribute="leading" secondItem="Dnf-YQ-wPw" secondAttribute="leading" id="YA0-dv-z6F"/>
                                         <constraint firstItem="dz3-Aw-ooX" firstAttribute="leading" secondItem="Dnf-YQ-wPw" secondAttribute="leading" id="dYK-Vz-TNd"/>
                                         <constraint firstAttribute="trailing" secondItem="aKm-xt-mC1" secondAttribute="trailing" constant="8" id="h2W-mj-2Mq"/>
@@ -259,7 +252,6 @@
                         <outlet property="headerLabel" destination="Bqr-1J-xkm" id="qLJ-FT-Xj4"/>
                         <outlet property="headerLabelHandleTopConstraint" destination="aLR-bC-lrL" id="DiD-e8-UD1"/>
                         <outlet property="headerView" destination="Y5r-Vk-UI1" id="mBq-Fd-cUD"/>
-                        <outlet property="locationLabel" destination="ROo-ex-AZB" id="SV2-DK-zhi"/>
                         <outlet property="nameLabelHandle" destination="Dnf-YQ-wPw" id="H5h-rp-CQG"/>
                         <outlet property="profileImageView" destination="OZr-CM-5Qu" id="XQV-Mw-HTS"/>
                         <outlet property="profileView" destination="pig-rF-tCC" id="wkc-U6-BTU"/>

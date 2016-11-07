@@ -215,7 +215,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             self.navigationController?.title = "Profile"
             self.navigationController?.pushViewController(profileViewController, animated: true)
         }    
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
